@@ -7,7 +7,7 @@
  If you can’t find the square root, throw a “no root” error.
  */
 
-enum IntSqrError: Error {
+enum IntSqrtError: Error {
     case low, high, noIntRoot
 }
 
@@ -15,11 +15,11 @@ func integerMean(_ firstNum: Int, _ secondNum: Int) -> Int {
     return (firstNum+secondNum)/2
 }
 
-func calculateIntSqr(_ number:Int) throws -> Int  {
+func calculateIntSqrt(_ number:Int) throws -> Int  {
     var lowerBound = 1
     var upperBound = 2_147_483_646
-    if number < lowerBound {throw IntSqrError.low}
-    if number > upperBound {throw IntSqrError.high}
+    if number < lowerBound {throw IntSqrtError.low}
+    if number > upperBound {throw IntSqrtError.high}
     
     var guess: Int
     var guessSquared: Int
@@ -41,17 +41,17 @@ func calculateIntSqr(_ number:Int) throws -> Int  {
         }
     }
     // none found or we would have returned by now
-    throw IntSqrError.noIntRoot
+    throw IntSqrtError.noIntRoot
 }
 
 func printIntSqrt(_ number:Int){
     do {
-        try print("Square root of \(number) is \(calculateIntSqr(number))")
-    } catch IntSqrError.low {
+        try print("Square root of \(number) is \(calculateIntSqrt(number))")
+    } catch IntSqrtError.low {
         print("Lower bound error for \(number)")
-    } catch IntSqrError.high {
+    } catch IntSqrtError.high {
         print("Upper bound error for \(number)")
-    } catch IntSqrError.noIntRoot {
+    } catch IntSqrtError.noIntRoot {
         print("No integer root for \(number)")
     } catch {
         assert(false)
